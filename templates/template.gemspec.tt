@@ -1,0 +1,11 @@
+Gem::Specification.new do |s|   
+  s.name        = "<%= name %>"   
+  s.version     = "0.0.1a"
+  s.summary     = "<%= name.capitalize %>"   
+  s.description = ""
+  s.authors     = ["TODO"] 
+  s.email       = "ggerman@gmail.com"
+  s.files       = ["lib/<%= name %>.rb"]   
+  s.homepage    = "https://rubystacknews.com/"   
+  s.license     = "MIT" 
+end

@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+
+require "thor"
+
+class Generator < Thor::Group
+  include Thor::Actions
+
+  argument :name
+
+  def self.source_root
+    File.dirname(__FILE__)
+  end
+
+  def make_gem_folder
+    empty_directory(name)
+  end
+
+  def crear_gemspec
+    template("templates/template.gemspec.tt", "#{name}/#{name}.gemspec")
+  end
+
+  def create_lib_folder
+    empty_directory("#{name}/lib")
+  end
+
+  def crear_main_rb
+    template("templates/main.rb.tt", "#{name}/lib/#{name}.rb")
+  end
+
+  def init_git_repo
+    inside(name) do
+      run "git init"
+    end
+  end
+
+  def copy_license
+    if yes?("Use GNU 3 License? (yes/no) ")
+      copy_file "templates/GNULICENSE", "#{name}/LICENSE"
+    end
+  end
+
+end
+
+Generator.start
